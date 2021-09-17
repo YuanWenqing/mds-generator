@@ -1,0 +1,15 @@
+// dependency management
+apply plugin: "io.spring.dependency-management"
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
+    }
+    dependencies {
+        dependency "org.projectlombok:lombok:1.18.20"
+        dependency "org.slf4j:slf4j-api:1.7.32"
+        dependency "junit:junit:4.13.2"
+
+
+    }
+}
+
