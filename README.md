@@ -1,2 +1,3 @@
 # mds-generator
-Generator for XXDynamicSqlSupport in Mybatis Dynamic Sql
+
+Generator from Java POJO for XXDynamicSqlSupport in Mybatis Dynamic Sql
