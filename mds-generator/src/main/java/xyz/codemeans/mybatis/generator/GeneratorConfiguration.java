@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan
-@EnableConfigurationProperties(MdsGeneratorProperties.class)
-public class MdsGeneratorConfiguration {
+@EnableConfigurationProperties(GeneratorProperties.class)
+public class GeneratorConfiguration {
 
 }

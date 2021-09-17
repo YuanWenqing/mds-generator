@@ -11,7 +11,7 @@ import xyz.codemeans.mybatis.generator.impl.GenerationDef;
  */
 @Data
 @ConfigurationProperties("mds-generator")
-public class MdsGeneratorProperties {
+public class GeneratorProperties {
 
   @NestedConfigurationProperty
   private List<GenerationDef> generations;
