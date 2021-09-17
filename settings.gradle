@@ -1,2 +1,2 @@
 include "mds-annotation"
-include "mds-generator-plugin"
+include "mds-generator"
