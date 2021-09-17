@@ -1,0 +1,6 @@
+dependencies {
+
+}
+
+description "executable generator plugin"
+apply from: "$rootDir/publish.oss.gradle"
