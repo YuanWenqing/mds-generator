@@ -17,11 +17,13 @@ public class NamingProcessor {
     if (profile.getPrefix() != null) {
       sb.append(profile.getPrefix());
     }
-    if (profile.getReplaceRegex() == null || profile.getReplaceRegex().length() == 0) {
-      sb.append(name);
-    } else {
-      sb.append(name.replace(profile.getReplaceRegex(), profile.getReplacement()));
+    if (profile.getReplaceRegex() != null && profile.getReplaceRegex().length() == 0) {
+      name = name.replace(profile.getReplaceRegex(), profile.getReplacement());
     }
+    if (profile.getFromFormat() != null && profile.getToFormat() != null) {
+      name = profile.getFromFormat().to(profile.getToFormat(), name);
+    }
+    sb.append(name);
     if (profile.getSuffix() != null) {
       sb.append(profile.getSuffix());
     }

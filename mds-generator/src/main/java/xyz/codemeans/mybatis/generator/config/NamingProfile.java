@@ -1,5 +1,6 @@
 package xyz.codemeans.mybatis.generator.config;
 
+import com.google.common.base.CaseFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,6 +11,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class NamingProfile {
 
+  /**
+   * name format to convert from; if unset, no conversion
+   */
+  private CaseFormat fromFormat;
+  /**
+   * name format to convert to; if unset, no conversion
+   */
+  private CaseFormat toFormat;
   /**
    * prefix to prepend to auto-generated name
    */
