@@ -4,7 +4,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     compileOnly("org.projectlombok:lombok")
 
-    implementation("com.github.javaparser:javaparser-symbol-solver-core")
+    implementation("org.reflections:reflections")
+    implementation("com.google.guava:guava")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter")

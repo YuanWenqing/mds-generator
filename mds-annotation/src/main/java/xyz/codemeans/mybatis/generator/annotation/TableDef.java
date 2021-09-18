@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * @author yuanwq
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface TableDef {
 
   /**

@@ -1,11 +1,13 @@
-package xyz.codemeans.mybatis.generator.impl;
+package xyz.codemeans.mybatis.generator.config;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author yuanwq
  */
 @Data
+@Accessors(chain = true)
 public class NamingProfile {
 
   /**

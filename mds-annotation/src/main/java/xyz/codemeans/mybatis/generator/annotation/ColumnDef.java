@@ -14,7 +14,7 @@ import java.sql.JDBCType;
  * @date: 2021/9/17
  */
 @Target(ElementType.FIELD)
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ColumnDef {
 
   /**
