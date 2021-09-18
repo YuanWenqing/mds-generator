@@ -17,8 +17,14 @@ import xyz.codemeans.mybatis.generator.config.GenerationDef;
  */
 public class TypeProcessor {
 
-  private final NamingProcessor namingProcessor = new NamingProcessor();
-  private final FieldProcessor fieldProcessor = new FieldProcessor();
+  private final NamingProcessor namingProcessor;
+  private final TypeMappings typeMappings;
+
+  public TypeProcessor(NamingProcessor namingProcessor,
+      TypeMappings typeMappings) {
+    this.namingProcessor = namingProcessor;
+    this.typeMappings = typeMappings;
+  }
 
   public TypeGeneration process(Class<?> type, GenerationDef def) {
     TypeGeneration generation = new TypeGeneration();
@@ -55,7 +61,7 @@ public class TypeProcessor {
     for (FieldGeneration field : fieldGenerations) {
       sb.append(indent)
           .append(String.format("public static final SqlColumn<%s> %s = %s.%s;\n",
-              field.getType().getSimpleName(), field.getSqlSupportFieldName(),
+              field.getSqlColumnType().getSimpleName(), field.getSqlSupportFieldName(),
               generation.getSqlTableInstanceName(), field.getSqlTableFieldName()));
     }
     sb.append("\n")
@@ -65,7 +71,7 @@ public class TypeProcessor {
     for (FieldGeneration field : fieldGenerations) {
       sb.append(indent).append(indent)
           .append(String.format("public final SqlColumn<%s> %s = column(\"%s\", JDBCTType.%s);\n",
-              field.getType().getSimpleName(), field.getSqlTableFieldName(),
+              field.getSqlColumnType().getSimpleName(), field.getSqlTableFieldName(),
               field.getColumnName(), field.getJdbcType().name()));
     }
     sb.append("\n")
@@ -81,8 +87,9 @@ public class TypeProcessor {
   private FieldGeneration generateField(Field field, GenerationDef def) {
     FieldGeneration generation = new FieldGeneration(field);
     generation
+        .setSqlColumnType(typeMappings.sqlColumnType(field))
+        .setJdbcType(typeMappings.jdbcType(field))
         .setColumnName(namingProcessor.columnName(field, def.getColumnNaming()))
-        .setType(fieldProcessor.fieldType(field))
         .setSqlSupportFieldName(
             namingProcessor.sqlSupportFieldName(field, def.getSqlSupportFieldNaming()))
         .setSqlTableFieldName(

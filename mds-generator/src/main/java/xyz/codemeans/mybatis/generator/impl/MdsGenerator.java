@@ -16,7 +16,11 @@ import xyz.codemeans.mybatis.generator.config.GenerationDef;
 @Slf4j
 public class MdsGenerator {
 
-  private final TypeProcessor typeProcessor = new TypeProcessor();
+  private final TypeProcessor typeProcessor;
+
+  public MdsGenerator(TypeProcessor typeProcessor) {
+    this.typeProcessor = typeProcessor;
+  }
 
   public List<File> generate(GenerationDef def) throws IOException {
     defaultOutputPackage(def);

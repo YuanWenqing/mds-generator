@@ -23,6 +23,11 @@ public @interface MdsColumn {
   String sqlSupportField() default "";
 
   /**
+   * component type of SqlColumn in SqlSupport/SqlTable type
+   */
+  Class<?> sqlColumnType() default Class.class;
+
+  /**
    * field name in SqlTable subclass
    */
   String sqlTableField() default "";

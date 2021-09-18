@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 public class FieldGeneration {
 
   private final Field field;
-  private Class<?> type;
+  private Class<?> sqlColumnType;
   private String sqlSupportFieldName;
   private String sqlTableFieldName;
   private String columnName;
