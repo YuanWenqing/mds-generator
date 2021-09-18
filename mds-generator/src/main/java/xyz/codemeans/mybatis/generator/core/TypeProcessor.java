@@ -18,12 +18,12 @@ import xyz.codemeans.mybatis.generator.config.GenerationDef;
 public class TypeProcessor {
 
   private final NamingProcessor namingProcessor;
-  private final TypeMappings typeMappings;
+  private final TypeMapping typeMapping;
 
   public TypeProcessor(NamingProcessor namingProcessor,
-      TypeMappings typeMappings) {
+      TypeMapping typeMapping) {
     this.namingProcessor = namingProcessor;
-    this.typeMappings = typeMappings;
+    this.typeMapping = typeMapping;
   }
 
   public TypeGeneration process(Class<?> type, GenerationDef def) {
@@ -87,8 +87,8 @@ public class TypeProcessor {
   private FieldGeneration generateField(Field field, GenerationDef def) {
     FieldGeneration generation = new FieldGeneration(field);
     generation
-        .setSqlColumnType(typeMappings.sqlColumnType(field))
-        .setJdbcType(typeMappings.jdbcType(field))
+        .setSqlColumnType(typeMapping.sqlColumnType(field))
+        .setJdbcType(typeMapping.jdbcType(field))
         .setColumnName(namingProcessor.columnName(field, def.getColumnNaming()))
         .setSqlSupportFieldName(
             namingProcessor.sqlSupportFieldName(field, def.getSqlSupportFieldNaming()))

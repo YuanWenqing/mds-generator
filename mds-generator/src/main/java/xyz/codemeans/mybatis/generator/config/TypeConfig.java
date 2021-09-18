@@ -16,6 +16,7 @@ import lombok.Data;
 @Data
 public class TypeConfig {
 
+  private JDBCType enumJdbcType = JDBCType.VARCHAR;
   private Map<String, JDBCType> type2jdbc = new LinkedHashMap<>();
 
   public TypeConfig() {

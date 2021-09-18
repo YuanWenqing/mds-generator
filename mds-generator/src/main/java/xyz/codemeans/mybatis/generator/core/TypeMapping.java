@@ -9,11 +9,11 @@ import xyz.codemeans.mybatis.generator.config.TypeConfig;
 /**
  * @author yuanwq
  */
-public class TypeMappings {
+public class TypeMapping {
 
   private final TypeConfig config;
 
-  public TypeMappings(TypeConfig config) {
+  public TypeMapping(TypeConfig config) {
     this.config = config;
   }
 
@@ -51,6 +51,10 @@ public class TypeMappings {
     if (type.equals(byte[].class) || type.equals(Byte[].class)) {
       return JDBCType.BLOB;
     }
+    if (type.isEnum() && config.getEnumJdbcType() != null) {
+      return config.getEnumJdbcType();
+    }
     return JDBCType.VARCHAR;
   }
+
 }
