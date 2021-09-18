@@ -15,7 +15,7 @@ import java.sql.JDBCType;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ColumnDef {
+public @interface MdsColumn {
 
   /**
    * specify column name.

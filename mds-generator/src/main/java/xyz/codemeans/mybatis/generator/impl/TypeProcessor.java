@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import xyz.codemeans.mybatis.generator.annotation.ExcludeGeneration;
+import xyz.codemeans.mybatis.generator.annotation.MdsExclude;
 import xyz.codemeans.mybatis.generator.config.GenerationDef;
 
 /**
@@ -113,7 +113,7 @@ public class TypeProcessor {
     List<Field> fields = new ArrayList<>();
     for (Field field : type.getDeclaredFields()) {
       if (Modifier.isStatic(field.getModifiers())
-          || field.getAnnotation(ExcludeGeneration.class) != null) {
+          || field.getAnnotation(MdsExclude.class) != null) {
         continue;
       }
       fields.add(field);

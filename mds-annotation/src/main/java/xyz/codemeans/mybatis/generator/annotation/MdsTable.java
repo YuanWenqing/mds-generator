@@ -6,14 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Specify catalog, schema, table of the annotated type if needed. Or table name will be generated
- * automatically according to config.
+ * Exclusively config of generation for type. If some setting is unset, config will fallback into
+ * global config.
  *
  * @author yuanwq
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TableDef {
+public @interface MdsTable {
 
   /**
    * table name, like: "my_table", "my_db.my_table"

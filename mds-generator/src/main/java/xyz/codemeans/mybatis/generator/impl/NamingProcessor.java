@@ -8,7 +8,7 @@ import xyz.codemeans.mybatis.generator.config.NamingProfile;
  */
 public class NamingProcessor {
 
-  public String buildName(String name, NamingProfile profile) {
+  public String generateName(String name, NamingProfile profile) {
     StringBuilder sb = new StringBuilder();
     if (profile.getPrefix() != null) {
       sb.append(profile.getPrefix());
