@@ -17,7 +17,8 @@ public class GenerationDef {
   /**
    * input package name
    */
-  private String inputPackage;
+  private String inputPackage = "";
+  private boolean recursive = false;
   /**
    * base output dir; if unset, use {@link #srcDir}
    */
