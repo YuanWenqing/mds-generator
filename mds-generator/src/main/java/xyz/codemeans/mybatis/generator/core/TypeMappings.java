@@ -1,4 +1,4 @@
-package xyz.codemeans.mybatis.generator.impl;
+package xyz.codemeans.mybatis.generator.core;
 
 import com.google.common.primitives.Primitives;
 import java.lang.reflect.Field;

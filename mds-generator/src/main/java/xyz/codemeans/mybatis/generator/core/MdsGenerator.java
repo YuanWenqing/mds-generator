@@ -1,4 +1,4 @@
-package xyz.codemeans.mybatis.generator.impl;
+package xyz.codemeans.mybatis.generator.core;
 
 import com.google.common.collect.Lists;
 import java.io.File;

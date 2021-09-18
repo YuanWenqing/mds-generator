@@ -1,4 +1,4 @@
-package xyz.codemeans.mybatis.generator.impl;
+package xyz.codemeans.mybatis.generator.core;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
