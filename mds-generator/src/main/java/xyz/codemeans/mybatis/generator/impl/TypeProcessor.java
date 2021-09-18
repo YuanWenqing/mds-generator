@@ -30,8 +30,8 @@ public class TypeProcessor {
         .setSqlTableTypeName(namingProcessor.sqlTableTypeName(type, def.getSqlTableTypeNaming()))
         .setSqlTableInstanceName(
             namingProcessor.sqlTableInstanceName(type, def.getSqlTableInstanceNaming()))
+        .setTableName(namingProcessor.tableName(type, def.getTableNaming()))
         .setQualifiedTableName(namingProcessor.qualifiedTableName(type, def));
-    generation.setTableName(namingProcessor.tableName(generation.getQualifiedTableName()));
     // fields
     List<Field> fields = findAllFields(type);
     Collection<String> imports = findAllImports(fields);
@@ -81,12 +81,12 @@ public class TypeProcessor {
   private FieldGeneration generateField(Field field, GenerationDef def) {
     FieldGeneration generation = new FieldGeneration(field);
     generation
-        .setColumnName(fieldProcessor.column(field, def.getColumnNaming()))
+        .setColumnName(namingProcessor.columnName(field, def.getColumnNaming()))
         .setType(fieldProcessor.fieldType(field))
         .setSqlSupportFieldName(
-            fieldProcessor.sqlSupportFieldName(field, def.getSqlSupportFieldNaming()))
+            namingProcessor.sqlSupportFieldName(field, def.getSqlSupportFieldNaming()))
         .setSqlTableFieldName(
-            fieldProcessor.sqlTableFieldName(field, def.getSqlTableFieldNaming()));
+            namingProcessor.sqlTableFieldName(field, def.getSqlTableFieldNaming()));
     return generation;
   }
 

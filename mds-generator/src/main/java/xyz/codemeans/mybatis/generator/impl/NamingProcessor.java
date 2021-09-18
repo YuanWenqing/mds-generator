@@ -1,5 +1,9 @@
 package xyz.codemeans.mybatis.generator.impl;
 
+import com.google.common.base.Strings;
+import java.lang.reflect.Field;
+import xyz.codemeans.mybatis.generator.annotation.MdsColumn;
+import xyz.codemeans.mybatis.generator.annotation.MdsTable;
 import xyz.codemeans.mybatis.generator.config.GenerationDef;
 import xyz.codemeans.mybatis.generator.config.NamingProfile;
 
@@ -24,23 +28,92 @@ public class NamingProcessor {
     return sb.toString();
   }
 
-  public String sqlSupportTypeName(Class<?> type, NamingProfile sqlSupportTypeNaming) {
+  public String sqlSupportTypeName(Class<?> type, NamingProfile profile) {
+    MdsTable mdsTable = type.getAnnotation(MdsTable.class);
+    if (mdsTable != null && !Strings.isNullOrEmpty(mdsTable.sqlSupportType())) {
+      return mdsTable.sqlSupportType();
+    }
+    return generateName(type.getSimpleName(), profile);
   }
 
-  public String sqlTableTypeName(Class<?> type, NamingProfile sqlTableTypeNaming) {
+  public String sqlTableTypeName(Class<?> type, NamingProfile profile) {
+    MdsTable mdsTable = type.getAnnotation(MdsTable.class);
+    if (mdsTable != null && !Strings.isNullOrEmpty(mdsTable.sqlTableType())) {
+      return mdsTable.sqlTableType();
+    }
+    return generateName(type.getSimpleName(), profile);
   }
 
-  public String sqlTableInstanceName(Class<?> type, NamingProfile sqlTableInstanceNaming) {
+  public String sqlTableInstanceName(Class<?> type, NamingProfile profile) {
+    MdsTable mdsTable = type.getAnnotation(MdsTable.class);
+    if (mdsTable != null && !Strings.isNullOrEmpty(mdsTable.sqlTableInstance())) {
+      return mdsTable.sqlTableInstance();
+    }
+    return generateName(type.getSimpleName(), profile);
+  }
+
+  public String tableName(Class<?> type, NamingProfile profile) {
+    MdsTable mdsTable = type.getAnnotation(MdsTable.class);
+    if (mdsTable != null && !Strings.isNullOrEmpty(mdsTable.table())) {
+      return mdsTable.table();
+    }
+    return generateName(type.getSimpleName(), profile);
   }
 
   public String qualifiedTableName(Class<?> type, GenerationDef def) {
-  }
-
-  public String tableName(String qualifiedTableName) {
+    String catalog = def.getCatalog();
+    String schema = def.getSchema();
+    String table = tableName(type, def.getTableNaming());
+    MdsTable mdsTable = type.getAnnotation(MdsTable.class);
+    if (mdsTable != null) {
+      if (!Strings.isNullOrEmpty(mdsTable.schema())) {
+        schema = mdsTable.schema();
+      }
+      if (!Strings.isNullOrEmpty(mdsTable.catalog())) {
+        catalog = mdsTable.catalog();
+      }
+    }
+    StringBuilder sb = new StringBuilder();
+    if (!Strings.isNullOrEmpty(catalog)) {
+      sb.append(catalog).append(".");
+      if (!Strings.isNullOrEmpty(schema)) {
+        sb.append(schema);
+      }
+      sb.append(".");
+    } else if (!Strings.isNullOrEmpty(schema)) {
+      sb.append(schema).append(".");
+    }
+    sb.append(table);
+    return sb.toString();
   }
 
   public String packageName(Class<?> type, GenerationDef def) {
     return def.getOutputPackage() + type.getPackage().getName()
         .substring(def.getInputPackage().length());
   }
+
+  public String sqlSupportFieldName(Field field, NamingProfile profile) {
+    MdsColumn mdsColumn = field.getAnnotation(MdsColumn.class);
+    if (mdsColumn != null && !Strings.isNullOrEmpty(mdsColumn.sqlSupportField())) {
+      return mdsColumn.sqlSupportField();
+    }
+    return generateName(field.getName(), profile);
+  }
+
+  public String sqlTableFieldName(Field field, NamingProfile profile) {
+    MdsColumn mdsColumn = field.getAnnotation(MdsColumn.class);
+    if (mdsColumn != null && !Strings.isNullOrEmpty(mdsColumn.sqlTableField())) {
+      return mdsColumn.sqlTableField();
+    }
+    return generateName(field.getName(), profile);
+  }
+
+  public String columnName(Field field, NamingProfile profile) {
+    MdsColumn mdsColumn = field.getAnnotation(MdsColumn.class);
+    if (mdsColumn != null && !Strings.isNullOrEmpty(mdsColumn.column())) {
+      return mdsColumn.column();
+    }
+    return generateName(field.getName(), profile);
+  }
+
 }

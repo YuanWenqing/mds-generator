@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 import java.sql.JDBCType;
 
 /**
- * specify name, jdbcType of column if needed. Or, name will be generated automatically and jdbcType
- * will be derived by the type of annotated field.
+ * Exclusively config of generation for field. If some setting is unset, config will fallback into
+ * global config.
  *
  * @author: yuanwq
  * @date: 2021/9/17
@@ -18,9 +18,23 @@ import java.sql.JDBCType;
 public @interface MdsColumn {
 
   /**
-   * specify column name.
+   * field name in SqlSupport type
    */
-  String name() default "";
+  String sqlSupportField() default "";
 
+  /**
+   * field name in SqlTable subclass
+   */
+  String sqlTableField() default "";
+
+  /**
+   * column name.
+   */
+  String column() default "";
+
+  /**
+   * {@link JDBCType}
+   */
   JDBCType jdbcType();
+
 }

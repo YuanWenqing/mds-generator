@@ -16,7 +16,22 @@ import java.lang.annotation.Target;
 public @interface MdsTable {
 
   /**
-   * table name, like: "my_table", "my_db.my_table"
+   * name of generated SqlSupport type
+   */
+  String sqlSupportType() default "";
+
+  /**
+   * name of generated static SqlTable instance in SqlSupport type
+   */
+  String sqlTableInstance() default "";
+
+  /**
+   * name of generated SqlTable subclass
+   */
+  String sqlTableType() default "";
+
+  /**
+   * table name
    */
   String table() default "";
 
