@@ -49,12 +49,9 @@ subprojects {
     jar.doLast {
         println "jar: ${archiveFile.get()}"
     }
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        from sourceSets.main.allJava
-        classifier("sources")
-        doLast {
-            println "sources: ${archiveFile.get()}"
-        }
+    java {
+        withJavadocJar()
+        withSourcesJar()
     }
     test.doLast {
         println test.reports.html.entryPoint
