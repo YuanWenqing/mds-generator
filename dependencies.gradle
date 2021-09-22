@@ -2,7 +2,7 @@
 apply plugin: "io.spring.dependency-management"
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:2.5.4"
     }
     dependencies {
         dependency "org.projectlombok:lombok:1.18.20"
