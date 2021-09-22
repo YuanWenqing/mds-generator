@@ -63,10 +63,14 @@ public class GenerationDef {
    */
   private String outputPackage;
   /**
-   * whether keep the same package structure for output as like #inputPackage. Only works if {@link
-   * #outputPackage} is set.
+   * whether to keep the same package structure for output as like #inputPackage. Only works if
+   * {@link #outputPackage} is set.
    */
   private boolean keepPackageStructure = true;
+  /**
+   * whether to generate for inherited fields
+   */
+  private boolean inheritField = true;
   private int indentSize = 2;
 
   /**

@@ -1,12 +1,13 @@
 package xyz.codemeans.mybatis.generator.core;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import xyz.codemeans.mybatis.generator.annotation.MdsExclude;
@@ -42,7 +43,7 @@ public class TypeProcessor {
         .setTableName(namingProcessor.tableName(type, def.getTableNaming()))
         .setQualifiedTableName(namingProcessor.qualifiedTableName(type, def));
     // fields
-    List<Field> fields = findAllFields(type);
+    Collection<Field> fields = resolveFields(type, def.isInheritField());
     Collection<String> imports = findAllImports(fields);
     List<FieldGeneration> fieldGenerations = fields.stream()
         .map(field -> generateField(field, def))
@@ -105,7 +106,7 @@ public class TypeProcessor {
     return generation;
   }
 
-  private Collection<String> findAllImports(List<Field> fields) {
+  private Collection<String> findAllImports(Collection<Field> fields) {
     Set<String> imports = new LinkedHashSet<>();
     imports.add("java.sql.JDBCType");
     imports.add("org.mybatis.dynamic.sql.SqlColumn");
@@ -124,16 +125,30 @@ public class TypeProcessor {
     return imports;
   }
 
-  private List<Field> findAllFields(Class<?> type) {
-    List<Field> fields = new ArrayList<>();
+  private Collection<Field> resolveFields(Class<?> type, boolean inheritField) {
+    Map<String, Field> fields = Maps.newLinkedHashMap();
+    fields.putAll(findAllFields(type));
+    if (inheritField) {
+      while (!type.getSuperclass().equals(Object.class)) {
+        type = type.getSuperclass();
+        findAllFields(type).entrySet()
+            .forEach(entry -> fields.putIfAbsent(entry.getKey(), entry.getValue()));
+      }
+    }
+    return fields.values();
+  }
+
+  private Map<String, Field> findAllFields(Class<?> type) {
+    Map<String, Field> fields = Maps.newLinkedHashMap();
     for (Field field : type.getDeclaredFields()) {
       if (Modifier.isStatic(field.getModifiers())
           || field.getAnnotation(MdsExclude.class) != null) {
         continue;
       }
-      fields.add(field);
+      fields.put(field.getName(), field);
     }
     return fields;
+
   }
 
 }
