@@ -1,12 +1,13 @@
 package xyz.codemeans.mybatis.generator.core;
 
 import com.google.common.collect.Lists;
+import com.google.common.reflect.ClassPath;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
 import xyz.codemeans.mybatis.generator.annotation.MdsExclude;
 import xyz.codemeans.mybatis.generator.annotation.MdsGenerated;
 import xyz.codemeans.mybatis.generator.config.GenerationDef;
@@ -25,9 +26,14 @@ public class MdsGenerator {
 
   public List<TypeGeneration> generate(GenerationDef def) throws IOException {
     List<TypeGeneration> generations = Lists.newArrayList();
-    Reflections reflections = new Reflections(def.getInputPackage(),
-        new SubTypesScanner(false));
-    for (Class<?> type : reflections.getSubTypesOf(Object.class)) {
+    Collection<Class> types = ClassPath.from(ClassLoader.getSystemClassLoader())
+        .getAllClasses()
+        .stream()
+        .filter(clazz -> clazz.getPackageName()
+            .equalsIgnoreCase(def.getInputPackage()))
+        .map(clazz -> clazz.load())
+        .collect(Collectors.toSet());
+    for (Class<?> type : types) {
       MdsExclude mdsExclude = type.getAnnotation(MdsExclude.class);
       MdsGenerated mdsGenerated = type.getAnnotation(MdsGenerated.class);
       if (mdsExclude != null || mdsGenerated != null) {
