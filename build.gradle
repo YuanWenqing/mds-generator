@@ -28,7 +28,7 @@ if (!project.hasProperty("release")) {
     String abbreviatedId = grgit.head().abbreviatedId
     version = "${prefix}-${version}.${abbreviatedId}"
 }
-println("version=$version")
+println("gitVersion=$version")
 
 subprojects {
     // repositories for project dependencies

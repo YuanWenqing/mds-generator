@@ -17,9 +17,9 @@ publishing {
             from components.java
 
             if (project.hasProperty("release")) {
-                version = project.getVersion()
+                version = "$projectVersion"
             } else {
-                version = project.getVersion() + "-SNAPSHOT"
+                version = "$projectVersion-SNAPSHOT"
             }
 
             pom {
