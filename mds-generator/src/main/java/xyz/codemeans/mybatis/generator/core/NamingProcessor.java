@@ -126,7 +126,7 @@ public class NamingProcessor {
   }
 
   public File file(File outputDir, String packageName, String typeName) {
-    String subpath = packageName.replace("\\.", File.separator);
+    String subpath = packageName.replace(".", File.separator);
     File dir = new File(outputDir, subpath);
     return new File(dir, typeName + ".java");
   }
