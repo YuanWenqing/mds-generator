@@ -18,9 +18,9 @@ implementation("xyz.codemeans.mybatis:mds-generator:1.1")
 
 See:
 
-* [`mds-generator/src/test/java/mds/example/ExampleApplication.java`](https://github.com/YuanWenqing/mds-generator/blob/main/mds-generator/src/test/java/mds/example/ExampleApplication.java) 
-* [`mds-generator/src/test/java/mds/example/ExampleMain.java`](https://github.com/YuanWenqing/mds-generator/blob/main/mds-generator/src/test/java/mds/example/ExampleMain.java) 
-* [`mds-generator/src/test/resources/application.properties`](https://github.com/YuanWenqing/mds-generator/blob/main/mds-generator/src/test/resources/application.properties) 
+* [`mds-generator/src/test/java/mds/example/ExampleApplication.java`](https://github.com/YuanWenqing/mds-generator/blob/main/mds-example/src/main/java/mds/example/ExampleApplication.java) 
+* [`mds-generator/src/test/java/mds/example/ExampleMain.java`](https://github.com/YuanWenqing/mds-generator/blob/main/mds-example/src/main/java/mds/example/ExampleMain.java) 
+* [`mds-generator/src/test/resources/application.properties`](https://github.com/YuanWenqing/mds-generator/blob/main/mds-example/src/main/resources/application.properties) 
 
 Usage: 
 

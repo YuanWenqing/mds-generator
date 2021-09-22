@@ -1,6 +1,7 @@
 package mds.example;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,10 +23,11 @@ public class ExampleApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println(properties);
     GeneratorRunner runner = new GeneratorRunner(properties);
     List<TypeGeneration> generations = runner.run();
-//    System.out.println(generations);
+    System.out.println(generations.stream()
+        .map(TypeGeneration::getOutfile)
+        .collect(Collectors.toList()));
   }
 
   public static void main(String[] args) {
