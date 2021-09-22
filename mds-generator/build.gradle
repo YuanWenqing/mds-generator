@@ -6,10 +6,12 @@ dependencies {
 
     implementation("org.reflections:reflections")
     implementation("com.google.guava:guava")
+    implementation("jakarta.validation:jakarta.validation-api")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    implementation("org.springframework.boot:spring-boot")
+    implementation("org.slf4j:slf4j-api")
+//    implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
 }
 

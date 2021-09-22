@@ -5,7 +5,6 @@ import java.util.List;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
-import org.springframework.stereotype.Component;
 import xyz.codemeans.mybatis.generator.config.GenerationDef;
 import xyz.codemeans.mybatis.generator.config.TypeConfig;
 
@@ -13,7 +12,6 @@ import xyz.codemeans.mybatis.generator.config.TypeConfig;
  * @author yuanwq
  */
 @Data
-@Component
 @ConfigurationProperties("codemeans.mybatis.generator")
 public class GeneratorProperties {
 

@@ -1,6 +1,8 @@
 package xyz.codemeans.mybatis.generator.config;
 
 import com.google.common.base.CaseFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -19,12 +21,14 @@ public class GenerationDef {
    *
    * @apiNote required
    */
+  @NotBlank
   private String inputPackage;
   /**
    * root output dir
    *
    * @apiNote required
    */
+  @NotNull
   private File outputDir;
   /**
    * charset for output files
