@@ -112,7 +112,7 @@ public class TypeProcessor {
       if (type.isArray()) {
         type = type.getComponentType();
       }
-      if (type.getPackage().equals("java.lang")
+      if (type.getPackage().getName().equals("java.lang")
           || type.isPrimitive()) {
         continue;
       }

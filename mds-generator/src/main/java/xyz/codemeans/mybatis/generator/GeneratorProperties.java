@@ -15,7 +15,6 @@ import xyz.codemeans.mybatis.generator.config.TypeConfig;
 @ConfigurationProperties("codemeans.mybatis.generator")
 public class GeneratorProperties {
 
-  @NestedConfigurationProperty
   private List<GenerationDef> generations = Lists.newArrayList();
   @NestedConfigurationProperty
   private TypeConfig types = new TypeConfig();

@@ -18,7 +18,7 @@ import xyz.codemeans.mybatis.generator.core.TypeProcessor;
 @Slf4j
 public class GeneratorRunner {
 
-  private GeneratorProperties properties = new GeneratorProperties();
+  private final GeneratorProperties properties;
 
   public GeneratorRunner(GeneratorProperties properties) {
     this.properties = properties;
