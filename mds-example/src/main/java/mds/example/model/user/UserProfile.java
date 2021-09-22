@@ -18,6 +18,7 @@ public class UserProfile extends ModelParent {
   private LocalDateTime createAt;
   private List<String> tags;
   private UserGender gender;
+  private int[] arr;
 
   @MdsExclude
   private String excludeField;
