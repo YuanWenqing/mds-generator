@@ -16,7 +16,7 @@ public class ExampleMain {
     properties.getGenerations().add(new GenerationDef()
         .setInputPackage("mds.example.model")
         .setOutputDir(new File("mds-generator/src/test/gen/"))
-        .setOutputPackage("mds.example.sql")
+//        .setOutputPackage("mds.example.sql")
     );
     GeneratorRunner runner = new GeneratorRunner(properties);
     runner.run();

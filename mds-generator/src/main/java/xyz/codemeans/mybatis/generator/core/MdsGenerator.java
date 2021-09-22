@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import xyz.codemeans.mybatis.generator.annotation.MdsExclude;
+import xyz.codemeans.mybatis.generator.annotation.MdsGenerated;
 import xyz.codemeans.mybatis.generator.config.GenerationDef;
 
 /**
@@ -28,7 +29,8 @@ public class MdsGenerator {
         new SubTypesScanner(false));
     for (Class<?> type : reflections.getSubTypesOf(Object.class)) {
       MdsExclude mdsExclude = type.getAnnotation(MdsExclude.class);
-      if (mdsExclude == null) {
+      MdsGenerated mdsGenerated = type.getAnnotation(MdsGenerated.class);
+      if (mdsExclude != null || mdsGenerated != null) {
         continue;
       }
       TypeGeneration generation = typeProcessor.process(type, def);
