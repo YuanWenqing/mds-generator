@@ -57,7 +57,6 @@ subprojects {
         println test.reports.html.entryPoint
     }
 
-    apply from: "$rootDir/dependencies.gradle"
     configurations.all {
         // check for updates every build
         resolutionStrategy {
