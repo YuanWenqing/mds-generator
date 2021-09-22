@@ -10,8 +10,7 @@ import java.sql.JDBCType;
  * Exclusively config of generation for field. If some setting is unset, config will fallback into
  * global config.
  *
- * @author: yuanwq
- * @date: 2021/9/17
+ * @author yuanwq
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

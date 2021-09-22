@@ -22,8 +22,6 @@ publishing {
                 version = project.getVersion() + "-SNAPSHOT"
             }
 
-            artifact sourcesJar
-
             pom {
                 name = project.name
                 description = project.description
