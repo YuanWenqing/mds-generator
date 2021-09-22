@@ -23,7 +23,6 @@ publishing {
             }
 
             artifact sourcesJar
-            artifact javadocJar
 
             pom {
                 name = project.name
