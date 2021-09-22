@@ -10,8 +10,8 @@ Generator from Java POJO for XXDynamicSqlSupport in Mybatis Dynamic Sql
 # Gradle
 
 ~~~groovy
-compileOnly("xyz.codemeans.mybatis:mds-annotation:1.0.+")
-compileOnly("xyz.codemeans.mybatis:mds-generator:1.0.+")
+implementation("xyz.codemeans.mybatis:mds-annotation:1.0.+")
+implementation("xyz.codemeans.mybatis:mds-generator:1.0.+")
 ~~~
 
 # Example
