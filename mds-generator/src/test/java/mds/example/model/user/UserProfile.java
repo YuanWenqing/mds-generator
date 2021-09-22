@@ -1,4 +1,4 @@
-package mds.example.model;
+package mds.example.model.user;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -31,7 +31,7 @@ public class GeneratorRunner {
     List<TypeGeneration> allGenerations = Lists.newArrayList();
     for (GenerationDef def : properties.getGenerations()) {
       List<TypeGeneration> generations = generator.generate(def);
-      log.info("def={} generated: {}", def,
+      log.info("models in {} generated: {}", def.getInputPackage(),
           Lists.transform(generations, TypeGeneration::getOutfile));
       allGenerations.addAll(generations);
     }

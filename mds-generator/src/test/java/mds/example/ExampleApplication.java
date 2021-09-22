@@ -25,7 +25,7 @@ public class ExampleApplication implements CommandLineRunner {
     System.out.println(properties);
     GeneratorRunner runner = new GeneratorRunner(properties);
     List<TypeGeneration> generations = runner.run();
-    System.out.println(generations);
+//    System.out.println(generations);
   }
 
   public static void main(String[] args) {
