@@ -26,7 +26,7 @@ public class MdsGenerator {
 
   public List<TypeGeneration> generate(GenerationDef def) throws IOException {
     List<TypeGeneration> generations = Lists.newArrayList();
-    Collection<Class> types = ClassPath.from(ClassLoader.getSystemClassLoader())
+    Collection<Class> types = ClassPath.from(getClass().getClassLoader())
         .getAllClasses()
         .stream()
         .filter(clazz -> clazz.getPackageName()

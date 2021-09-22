@@ -1,2 +1,3 @@
 include "mds-annotation"
 include "mds-generator"
+include "mds-example"

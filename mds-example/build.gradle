@@ -1,0 +1,13 @@
+dependencies {
+    implementation(project(":mds-annotation"))
+    implementation(project(":mds-generator"))
+
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly("org.projectlombok:lombok:1.18.20")
+
+    implementation("org.springframework.boot:spring-boot-starter:2.5.4")
+    implementation("org.springframework.boot:spring-boot-starter-log4j2:2.5.4")
+    implementation("org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.3.0")
+
+}
+
