@@ -73,7 +73,7 @@ public class TypeProcessor {
             generation.getSqlTableTypeName()));
     for (FieldGeneration field : fieldGenerations) {
       sb.append(indent).append(indent)
-          .append(String.format("public final SqlColumn<%s> %s = column(\"%s\", JDBCTType.%s);\n",
+          .append(String.format("public final SqlColumn<%s> %s = column(\"%s\", JDBCType.%s);\n",
               field.getSqlColumnType().getSimpleName(), field.getSqlTableFieldName(),
               field.getColumnName(), field.getJdbcType().name()));
     }
@@ -112,8 +112,8 @@ public class TypeProcessor {
       if (type.isArray()) {
         type = type.getComponentType();
       }
-      if (type.getPackage().getName().equals("java.lang")
-          || type.isPrimitive()) {
+      if (type.isPrimitive()
+          || type.getPackage().getName().equals("java.lang")) {
         continue;
       }
       imports.add(type.getName());

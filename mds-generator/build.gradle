@@ -16,6 +16,7 @@ dependencies {
     testImplementation("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter")
     testImplementation("org.springframework.boot:spring-boot-starter-log4j2")
+    testImplementation("org.mybatis.dynamic-sql:mybatis-dynamic-sql")
 
 }
 

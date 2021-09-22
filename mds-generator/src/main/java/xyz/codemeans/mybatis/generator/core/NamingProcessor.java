@@ -92,7 +92,7 @@ public class NamingProcessor {
 
   public String packageName(Class<?> type, GenerationDef def) {
     if (Strings.isNullOrEmpty(def.getOutputPackage())) {
-      return type.getPackage() + ".sql";
+      return type.getPackage().getName() + ".sql";
     }
     if (def.isKeepPackageStructure()) {
       return def.getOutputPackage() + type.getPackage().getName()
