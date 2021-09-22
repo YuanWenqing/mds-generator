@@ -1,6 +1,7 @@
 package xyz.codemeans.mybatis.generator.core;
 
 import com.google.common.base.Strings;
+import java.io.File;
 import java.lang.reflect.Field;
 import xyz.codemeans.mybatis.generator.annotation.MdsColumn;
 import xyz.codemeans.mybatis.generator.annotation.MdsTable;
@@ -90,8 +91,14 @@ public class NamingProcessor {
   }
 
   public String packageName(Class<?> type, GenerationDef def) {
-    return def.getOutputPackage() + type.getPackage().getName()
-        .substring(def.getInputPackage().length());
+    if (Strings.isNullOrEmpty(def.getOutputPackage())) {
+      return type.getPackage() + ".sql";
+    }
+    if (def.isKeepPackageStructure()) {
+      return def.getOutputPackage() + type.getPackage().getName()
+          .substring(def.getInputPackage().length());
+    }
+    return def.getOutputPackage();
   }
 
   public String sqlSupportFieldName(Field field, NamingProfile profile) {
@@ -118,4 +125,9 @@ public class NamingProcessor {
     return generateName(field.getName(), profile);
   }
 
+  public File file(File outputDir, String packageName, String typeName) {
+    String subpath = packageName.replace("\\.", File.separator);
+    File dir = new File(outputDir, subpath);
+    return new File(dir, typeName + ".java");
+  }
 }

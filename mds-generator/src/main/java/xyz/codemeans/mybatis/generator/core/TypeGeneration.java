@@ -1,5 +1,6 @@
 package xyz.codemeans.mybatis.generator.core;
 
+import java.io.File;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,5 +17,6 @@ public class TypeGeneration {
   private String sqlTableInstanceName;
   private String tableName;
   private String qualifiedTableName;
+  private File outfile;
   private String content;
 }

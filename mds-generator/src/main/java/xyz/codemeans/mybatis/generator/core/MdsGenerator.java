@@ -1,7 +1,6 @@
 package xyz.codemeans.mybatis.generator.core;
 
 import com.google.common.collect.Lists;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
@@ -22,34 +21,18 @@ public class MdsGenerator {
     this.typeProcessor = typeProcessor;
   }
 
-  public List<File> generate(GenerationDef def) throws IOException {
-    defaultOutputPackage(def);
-    List<File> outfiles = Lists.newArrayList();
+  public List<TypeGeneration> generate(GenerationDef def) throws IOException {
+    List<TypeGeneration> generations = Lists.newArrayList();
     Reflections reflections = new Reflections(def.getInputPackage(),
         new SubTypesScanner(false));
-    File outdir = composeDir(def);
     for (Class<?> type : reflections.getSubTypesOf(Object.class)) {
       TypeGeneration generation = typeProcessor.process(type, def);
-      File outfile = new File(outdir, generation.getSqlSupportTypeName() + ".java");
-      Files.write(outfile.toPath(), generation.getContent().getBytes(def.getOutputCharset()));
+      generation.getOutfile().getParentFile().mkdirs();
+      Files.write(generation.getOutfile().toPath(),
+          generation.getContent().getBytes(def.getOutputCharset()));
+      generations.add(generation);
     }
-    System.out.println(reflections.getAllTypes());
-    reflections.getSubTypesOf(Object.class)
-        .forEach(System.out::println);
-
-    return outfiles;
+    return generations;
   }
-
-  private void defaultOutputPackage(GenerationDef def) {
-    if (def.getOutputPackage() == null || def.getOutputPackage().length() == 0) {
-      def.setOutputPackage(def.getInputPackage() + ".sql");
-    }
-  }
-
-  private File composeDir(GenerationDef def) {
-    String subpath = def.getOutputPackage().replace("\\.", File.separator);
-    return new File(def.getOutputDir(), subpath);
-  }
-
 
 }

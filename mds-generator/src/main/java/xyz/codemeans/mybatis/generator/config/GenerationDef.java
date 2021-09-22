@@ -16,10 +16,14 @@ public class GenerationDef {
 
   /**
    * input package name
+   *
+   * @apiNote required
    */
   private String inputPackage;
   /**
-   * base output dir
+   * root output dir
+   *
+   * @apiNote required
    */
   private File outputDir;
   /**
@@ -31,29 +35,34 @@ public class GenerationDef {
    *
    * @apiNote default suffix: `DynamicSqlSupport`
    */
-  private NamingProfile sqlSupportTypeNaming;
+  private NamingProfile sqlSupportTypeNaming = new NamingProfile();
   /**
    * config for name changing of auto-generated SqlTable instance in SqlSupport
    *
    * @apiNote default format conversion: UPPER_CAMEL to LOWER_CAMEL
    */
-  private NamingProfile sqlTableInstanceNaming;
+  private NamingProfile sqlTableInstanceNaming = new NamingProfile();
   /**
    * config for name changing of static SqlColumn fields in auto-generated SqlSupport type
    */
-  private NamingProfile sqlSupportFieldNaming;
+  private NamingProfile sqlSupportFieldNaming = new NamingProfile();
   /**
    * config for name changing of auto-generated SqlTable subclass
    */
-  private NamingProfile sqlTableTypeNaming;
+  private NamingProfile sqlTableTypeNaming = new NamingProfile();
   /**
    * config for name changing of fields in auto-generated SqlTable
    */
-  private NamingProfile sqlTableFieldNaming;
+  private NamingProfile sqlTableFieldNaming = new NamingProfile();
   /**
-   * base package name for output; if unset, use {@link #inputPackage}.sql
+   * base package name for output; if unset, use {@code <inputType.package>.sql}
    */
   private String outputPackage;
+  /**
+   * whether keep the same package structure for output as like #inputPackage. Only works if {@link
+   * #outputPackage} is set.
+   */
+  private boolean keepPackageStructure = true;
   private int indentSize = 2;
 
   /**
@@ -69,13 +78,13 @@ public class GenerationDef {
    *
    * @apiNote default format conversion: UPPER_CAMEL to LOWER_UNDERSCORE
    */
-  private NamingProfile tableNaming;
+  private NamingProfile tableNaming = new NamingProfile();
   /**
    * config for changing of auto-generated column name
    *
    * @apiNote default format conversion: LOWER_CAMEL to LOWER_UNDERSCORE
    */
-  private NamingProfile columnNaming;
+  private NamingProfile columnNaming = new NamingProfile();
 
   public GenerationDef() {
     sqlSupportTypeNaming.setSuffix("DynamicSqlSupport");

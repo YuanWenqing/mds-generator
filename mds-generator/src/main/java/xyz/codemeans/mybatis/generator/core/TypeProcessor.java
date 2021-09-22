@@ -17,13 +17,16 @@ import xyz.codemeans.mybatis.generator.config.GenerationDef;
  */
 public class TypeProcessor {
 
-  private final NamingProcessor namingProcessor;
   private final TypeMapping typeMapping;
+  private final NamingProcessor namingProcessor;
 
-  public TypeProcessor(NamingProcessor namingProcessor,
-      TypeMapping typeMapping) {
-    this.namingProcessor = namingProcessor;
+  public TypeProcessor(TypeMapping typeMapping) {
+    this(typeMapping, new NamingProcessor());
+  }
+
+  public TypeProcessor(TypeMapping typeMapping, NamingProcessor namingProcessor) {
     this.typeMapping = typeMapping;
+    this.namingProcessor = namingProcessor;
   }
 
   public TypeGeneration process(Class<?> type, GenerationDef def) {
@@ -81,6 +84,8 @@ public class TypeProcessor {
         .append(indent).append("}\n")
         .append("}");
     generation.setContent(sb.toString());
+    generation.setOutfile(namingProcessor.file(def.getOutputDir(), generation.getPackageName(),
+        generation.getSqlSupportTypeName()));
     return generation;
   }
 
