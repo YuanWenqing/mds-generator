@@ -16,6 +16,7 @@ public class TypeGeneration {
   private String sqlSupportTypeName;
   private String sqlTableTypeName;
   private String sqlTableInstanceName;
+  private String fieldsTypeName;
   private String tableName;
   private String qualifiedTableName;
   private File outfile;

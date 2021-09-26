@@ -40,6 +40,7 @@ public class TypeProcessor {
         .setSqlTableTypeName(namingProcessor.sqlTableTypeName(type, def.getSqlTableTypeNaming()))
         .setSqlTableInstanceName(
             namingProcessor.sqlTableInstanceName(type, def.getSqlTableInstanceNaming()))
+        .setFieldsTypeName(namingProcessor.fieldsTypeName(type, def.getFieldsTypeNaming()))
         .setTableName(namingProcessor.tableName(type, def.getTableNaming()))
         .setQualifiedTableName(namingProcessor.qualifiedTableName(type, def));
     // fields
@@ -56,8 +57,12 @@ public class TypeProcessor {
         .append("@xyz.codemeans.mybatis.generator.annotation.MdsGenerated\n")
         .append(String.format("public final class %s {\n", generation.getSqlSupportTypeName()));
     sb.append(generateSqlSupportTypeFields(def, generation, fieldGenerations));
-    sb.append("\n");
-    sb.append(generateSqlTableType(def, generation, fieldGenerations));
+    sb.append("\n")
+        .append(generateSqlTableType(def, generation, fieldGenerations));
+    if (def.isGenerateFieldsType()) {
+      sb.append("\n")
+          .append(generateFieldsType(def, generation, fields));
+    }
     sb.append("}");
     generation.setContent(sb.toString());
     generation.setOutfile(namingProcessor.file(def.getOutputDir(), generation.getPackageName(),
@@ -118,6 +123,29 @@ public class TypeProcessor {
         .append(String.format("public %s() { super(\"%s\"); }\n",
             generation.getSqlTableTypeName(), generation.getQualifiedTableName()))
         .append(indent).append("}\n");
+    return sb.toString();
+  }
+
+  private String generateFieldsType(GenerationDef def, TypeGeneration generation,
+      Collection<Field> fields) {
+    StringBuilder sb = new StringBuilder();
+    String indent = Strings.repeat(" ", def.getIndentSize());
+    sb.append(indent)
+        .append(String.format("/** @see %s */\n", generation.getType().getName()))
+        .append(indent)
+        .append("@xyz.codemeans.mybatis.generator.annotation.MdsGenerated\n")
+        .append(indent)
+        .append(String.format("public interface %s {\n",
+            generation.getFieldsTypeName()));
+    for (Field field : fields) {
+      sb.append(indent).append(indent)
+          .append(String.format("/** @see %s#%s */\n",
+              field.getDeclaringClass().getName(), field.getName()))
+          .append(indent).append(indent)
+          .append(String.format("String %s = \"%s\";\n",
+              field.getName(), field.getName()));
+    }
+    sb.append(indent).append("}\n");
     return sb.toString();
   }
 

@@ -31,6 +31,11 @@ public @interface MdsTable {
   String sqlTableType() default "";
 
   /**
+   * name of generated Fields class
+   */
+  String fieldsType() default "";
+
+  /**
    * table name
    */
   String table() default "";

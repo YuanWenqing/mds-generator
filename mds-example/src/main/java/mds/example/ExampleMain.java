@@ -18,7 +18,7 @@ public class ExampleMain {
     GeneratorProperties properties = new GeneratorProperties();
     properties.getGenerations().add(new GenerationDef()
         .setInputPackage("mds.example.model")
-        .setOutputDir(new File("mds-example/src/main/gen/"))
+        .setOutputDir(new File("mds-example/src/main/java/"))
     );
     GeneratorRunner runner = new GeneratorRunner(properties);
     List<TypeGeneration> generations = runner.run();

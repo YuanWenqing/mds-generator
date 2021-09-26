@@ -55,6 +55,14 @@ public class NamingProcessor {
     return generateName(type.getSimpleName(), profile);
   }
 
+  public String fieldsTypeName(Class<?> type, NamingProfile profile) {
+    MdsTable mdsTable = type.getAnnotation(MdsTable.class);
+    if (mdsTable != null && !Strings.isNullOrEmpty(mdsTable.fieldsType())) {
+      return mdsTable.fieldsType();
+    }
+    return generateName(type.getSimpleName(), profile);
+  }
+
   public String tableName(Class<?> type, NamingProfile profile) {
     MdsTable mdsTable = type.getAnnotation(MdsTable.class);
     if (mdsTable != null && !Strings.isNullOrEmpty(mdsTable.table())) {

@@ -75,11 +75,13 @@ public class GenerationDef {
   /**
    * whether to generate Fields class which contains namings of all fields in model type
    */
-  private boolean generateFields = false;
+  private boolean generateFieldsType = true;
   /**
    * config for name changing of auto-generated Fields class
+   *
+   * @apiNote default suffix: Fields
    */
-  private NamingProfile FieldsTypeNaming = new NamingProfile();
+  private NamingProfile fieldsTypeNaming = new NamingProfile();
 
   /**
    * default catalog
@@ -107,6 +109,8 @@ public class GenerationDef {
     sqlTableInstanceNaming
         .setFromFormat(CaseFormat.UPPER_CAMEL)
         .setToFormat(CaseFormat.LOWER_CAMEL);
+    fieldsTypeNaming
+        .setSuffix("Fields");
     tableNaming
         .setFromFormat(CaseFormat.UPPER_CAMEL)
         .setToFormat(CaseFormat.LOWER_UNDERSCORE);
