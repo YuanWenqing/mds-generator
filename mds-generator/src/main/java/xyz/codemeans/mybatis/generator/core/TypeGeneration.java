@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class TypeGeneration {
 
+  private final Class<?> type;
   private String packageName;
   private String sqlSupportTypeName;
   private String sqlTableTypeName;

@@ -72,6 +72,14 @@ public class GenerationDef {
    */
   private boolean inheritField = true;
   private int indentSize = 2;
+  /**
+   * whether to generate Fields class which contains namings of all fields in model type
+   */
+  private boolean generateFields = false;
+  /**
+   * config for name changing of auto-generated Fields class
+   */
+  private NamingProfile FieldsTypeNaming = new NamingProfile();
 
   /**
    * default catalog
